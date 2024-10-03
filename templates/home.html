@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dance Club</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merienda&display=swap">
+    <style>
+        /* General styles for dark theme */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Merienda', cursive; /* Apply the goth font */
+            color: #00adb5;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        
+        h1 {
+            font-size: 2.5rem; /* Adjust size */
+            text-shadow: 2px 2px 4px rgba(0, 173, 181, 0.7); /* Shadow effect for depth */
+        }
+
+        h2 {
+            font-size: 2rem; /* Adjust size */
+            text-shadow: 2px 2px 4px rgba(0, 173, 181, 0.5); /* Shadow effect for depth */
+        }
+
+        h3 {
+            font-size: 1.5rem; /* Adjust size */
+            text-shadow: 2px 2px 4px rgba(0, 173, 181, 0.5); /* Shadow effect for depth */
+        }
+
+        .logo {
+            display: block;
+            margin: 0 auto 20px;
+            width: 150px;
+            border-radius: 10px;
+        }
+
+        /* Container for the content */
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background: #1f1f1f;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .description {
+            padding: 20px;
+            background: #2c2c2c;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 15px 50px; /* Added width to the button */
+            border: none;
+            border-radius: 8px;
+            background-color: #00adb5;
+            color: #121212;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 173, 181, 0.4);
+            align-self: flex-end; /* Align button to the right */
+            margin-bottom: 40px; /* Add margin below the button */
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #008c92;
+            box-shadow: 0 6px 15px rgba(0, 173, 181, 0.6);
+        }
+
+        /* Map styles */
+        #map {
+            height: 400px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border: 2px solid #00adb5;
+        }
+
+        /* Make sure text inputs match the theme */
+        textarea {
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            background-color: #333;
+            color: #e0e0e0;
+            font-size: 16px;
+            resize: none;
+            height: 120px;
+            width: 100%; /* Make textarea full width */
+}
+
+        
+        textarea::placeholder {
+            color: #b0b0b0;
+        }
+        /* Message List Styles */
+        ul.messages {
+            list-style-type: none; /* Remove bullet points */
+            padding: 0;
+            margin: 0;
+        }
+
+        ul.messages li {
+            background-color: #2a2a2a; /* Dark background for messages */
+            color: #e0e0e0; /* Light text color */
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 173, 181, 0.2); /* Subtle shadow */
+            position: relative;
+            overflow: hidden; /* Ensure the gradient stays within the message box */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effects */
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        ul.messages li::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(0, 173, 181, 0.4), transparent);
+            transition: left 0.5s ease; /* Smooth animation */
+        }
+
+        ul.messages li:hover::before {
+            left: 100%; /* Slide the gradient to the right on hover */
+        }
+
+        ul.messages li:hover {
+            transform: scale(1.02); /* Slightly enlarge the message box on hover */
+            box-shadow: 0 8px 20px rgba(0, 173, 181, 0.5); /* Increase shadow on hover */
+        }
+
+        /* Optional: Styling for the first message in the list */
+        ul.messages li:first-child {
+            background-color: #1f1f1f;
+            border-left: 5px solid #00adb5; /* Highlight first message */
+            font-weight: bold;
+        }
+
+        /* Table styles */
+            /* Table styles */
+        table {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            width: 100%; /* Ensure table takes full width */
+            border-collapse: collapse; /* Merge borders */
+        }
+
+        th {
+            text-align: left;
+            padding: 10px; /* Padding for header cells */
+            background-color: #1f1f1f; /* Consistent background color */
+            color: #00adb5; /* Header text color */
+            font-size: 18px; 
+            font-weight: 600;
+        }
+
+        tbody tr {
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; /* Add transition effects */
+        }
+
+        tbody tr:hover {
+            background-color: rgba(0, 173, 181, 0.3); /* Change background color on hover */
+            transform: scale(1.02); /* Slightly enlarge the row on hover */
+            box-shadow: 0 0 20px rgba(0, 173, 181, 0.8); /* Add glow effect */
+        }
+
+        tbody td {
+            padding: 10px; /* Padding for data cells */
+            border: 1px solid #00adb5; /* Consistent border color */
+            color: #e0e0e0; /* Text color */
+            font-size: 16px; /* Font size */
+            transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+        }
+
+        /* Optional: Highlighting specific cell hover */
+        tbody td:hover {
+            background-color: #00adb5; /* Change background color on hover */
+            color: #121212; /* Change text color on hover */
+            box-shadow: 0 0 10px rgba(0, 173, 181, 0.6); /* Add glow effect to cells */
+        }
+
+
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <img src="{{ url_for('static', filename='images/logo.JPG') }}" alt="Logo" class="logo">
+
+        <h1>Bun venit la haos:))</h1>
+
+        <div class="description">
+            <p>
+                Clubul nostru de dans oferă oportunități extraordinare pentru toți cei care vor să învețe și să se distreze pe ritmurile street dance-ului! De luni până vineri, copiii pot veni să-și dezvolte abilitățile de dans și creativitatea într-un mediu prietenos și energic. Grupele sunt împărțite în funcție de vârstă, astfel încât toți participanții să se simtă confortabil și să progreseze în ritmul lor.
+            </p>
+
+            <h3>Grupe Copii</h3>
+            <p>
+                Pentru cei mici, cu vârste cuprinse între 5 și 13 ani, avem programe dinamice care îmbină mișcările de bază ale street dance-ului cu jocuri interactive pentru a dezvolta coordonarea, expresivitatea și încrederea în sine.
+            </p>
+
+            <h3>Grupe Adolescenți</h3>
+            <p>
+                Pentru adolescenții de 14 ani și peste, oferim cursuri mai avansate, axate pe tehnici de dans urban, coregrafii complexe și creativitate, pregătindu-i pentru performanță și competiții.
+            </p>
+
+            <h3>Cursuri Adulți</h3>
+            <p>
+                De asemenea, pentru adulți, avem cursuri speciale care permit atât începătorilor, cât și celor cu experiență, să se relaxeze și să își îmbunătățească condiția fizică prin dans. Fie că vrei să te deconectezi după o zi de muncă sau să-ți redescoperi pasiunea pentru dans, vei găsi aici locul potrivit pentru tine!
+            </p>
+        </div>
+
+        <h2>Lasa-ne o recenzie!</h2>
+        <form method="POST">
+            <textarea name="message" required placeholder="Type your message here..."></textarea>
+            <button type="submit">Submit</button>
+        </form>
+
+        <h2>Recenzii</h2>
+        <ul class="messages">
+            {% if messages|length > 0 %}
+                {% for message in messages %}
+                    <li>{{ message.content }}</li>
+                {% endfor %}
+            {% else %}
+                <li>Nu sunt recenzii disponibile în acest moment.</li>
+            {% endif %}
+        </ul>
+
+        <h2>Programul Clubului</h2>
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr>
+                    <th style="border: 1px solid #00adb5; padding: 10px; background-color: #1f1f1f; color: #00adb5; font-size: 18px; font-weight: 600;">Ora</th>
+                    <th style="border: 1px solid #00adb5; padding: 10px; background-color: #1f1f1f; color: #00adb5; font-size: 18px; font-weight: 600;">Luni</th>
+                    <th style="border: 1px solid #00adb5; padding: 10px; background-color: #1f1f1f; color: #00adb5; font-size: 18px; font-weight: 600;">Marți</th>
+                    <th style="border: 1px solid #00adb5; padding: 10px; background-color: #1f1f1f; color: #00adb5; font-size: 18px; font-weight: 600;">Miercuri</th>
+                    <th style="border: 1px solid #00adb5; padding: 10px; background-color: #1f1f1f; color: #00adb5; font-size: 18px; font-weight: 600;">Joi</th>
+                    <th style="border: 1px solid #00adb5; padding: 10px; background-color: #1f1f1f; color: #00adb5; font-size: 18px; font-weight: 600;">Vineri</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for hour, days in schedule.items() %}
+                <tr style="transition: background-color 0.3s;">
+                    <td style="border: 1px solid #00adb5; padding: 10px; background-color: #2c2c2c; color: #e0e0e0; font-size: 16px;">{{ hour }}</td>
+                    <td style="border: 1px solid #00adb5; padding: 10px; background-color: #2c2c2c; color: #e0e0e0; font-size: 16px;">{{ days['Monday'] }}</td>
+                    <td style="border: 1px solid #00adb5; padding: 10px; background-color: #2c2c2c; color: #e0e0e0; font-size: 16px;">{{ days['Tuesday'] }}</td>
+                    <td style="border: 1px solid #00adb5; padding: 10px; background-color: #2c2c2c; color: #e0e0e0; font-size: 16px;">{{ days['Wednesday'] }}</td>
+                    <td style="border: 1px solid #00adb5; padding: 10px; background-color: #2c2c2c; color: #e0e0e0; font-size: 16px;">{{ days['Thursday'] }}</td>
+                    <td style="border: 1px solid #00adb5; padding: 10px; background-color: #2c2c2c; color: #e0e0e0; font-size: 16px;">{{ days['Friday'] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+        <h2>Locatia</h2>
+        <div id="map"></div> <!-- Map element -->
+
+    </div>
+
+    <script>
+        function initMap() {
+            // The location of the dance club
+            const location = { lat: 44.63236434712539, lng: 22.648900640535015 }; // Example coordinates
+
+            // Initialize the map
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 10, 
+                center: location,
+                styles: [ // Custom dark mode styles for Google Maps
+                    { elementType: 'geometry', stylers: [{ color: '#212121' }] },
+                    { elementType: 'labels.text.stroke', stylers: [{ color: '#212121' }] },
+                    { elementType: 'labels.text.fill', stylers: [{ color: '#757575' }] },
+                    {
+                        featureType: 'administrative',
+                        elementType: 'geometry',
+                        stylers: [{ color: '#757575' }]
+                    },
+                    {
+                        featureType: 'road',
+                        elementType: 'geometry',
+                        stylers: [{ color: '#2c2c2c' }]
+                    }
+                ]
+            });
+
+            // Marker at the location
+            const marker = new google.maps.Marker({
+                position: location,
+                map: map,
+            });
+        }
+    </script>
+
+    <!-- Google Maps API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUeSyW_-0qn97c80de_wKIzJ0wpGinFO0&callback=initMap" async defer></script>
+
+</body>
+
+</html>
